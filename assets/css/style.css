@@ -188,17 +188,18 @@ img { max-width: 100%; display: block; }
   box-shadow: 0 12px 40px rgba(0,0,0,.45);
 }
 /* Apple — segmented-control pill: the active tab is a physical
-   highlight that slides between options, like iOS. */
+   highlight that slides between options, like iOS. Positioned by
+   JS to hug the active button exactly, so a wrapped nav (mobile)
+   keeps the pill on the right row. */
 .cmdnav__pill {
-  position: absolute; top: 8px; bottom: 8px; left: 8px;
+  position: absolute; left: 8px; top: 8px;
   z-index: 0;
   border-radius: 9px;
   border: 1px solid var(--stroke-hi);
   background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.04));
   box-shadow: 0 4px 14px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.08);
-  transition: transform .5s var(--ease), width .5s var(--ease);
+  transition: left .5s var(--ease), top .5s var(--ease), width .5s var(--ease), height .5s var(--ease);
   pointer-events: none;
-  will-change: transform, width;
 }
 .nav-btn {
   flex: 1 1 auto; min-width: max-content;

@@ -156,8 +156,9 @@
 
   panels.forEach(p => { p.classList.add("is-focusable"); p.setAttribute("tabindex", "-1"); p.setAttribute("data-ghost", GHOST[p.dataset.page] || ""); });
 
-  /* Apple — slide the active-tab pill under the pressed button,
-     springing from the button's live position (interruptible). */
+  /* Apple — slide the active-tab pill to hug the pressed button,
+     springing from the button's live position (interruptible).
+     left/top/width/height so a wrapped nav (mobile) stays correct. */
   function movePill() {
     if (!pill || reduced) { if (pill) pill.style.opacity = "0"; return; }
     const active = document.querySelector(".nav-btn.is-active");
@@ -167,7 +168,9 @@
     const r = active.getBoundingClientRect();
     pill.style.opacity = "1";
     pill.style.width = r.width + "px";
-    pill.style.transform = `translateX(${r.left - navRect.left - 8}px)`;
+    pill.style.height = r.height + "px";
+    pill.style.left = (r.left - navRect.left) + "px";
+    pill.style.top = (r.top - navRect.top) + "px";
   }
   movePill();
   window.addEventListener("resize", movePill);
