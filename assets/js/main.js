@@ -24,7 +24,10 @@
 
     if (reduced) {
       renderAllLines(log);
-      setTimeout(() => overlay.classList.add("is-done"), 150);
+      setTimeout(() => {
+        overlay.classList.add("is-done");
+        document.body.classList.add("is-ready");
+      }, 150);
       return;
     }
 
@@ -34,7 +37,10 @@
 
     function typeLine() {
       if (line >= BOOT.length) {
-        setTimeout(() => overlay.classList.add("is-done"), 380);
+        setTimeout(() => {
+          overlay.classList.add("is-done");
+          document.body.classList.add("is-ready");
+        }, 560);
         return;
       }
       if (col === 0) {
@@ -48,10 +54,10 @@
       lineEl.appendChild(node);
       col++;
       if (col < BOOT[line].length) {
-        setTimeout(typeLine, 34);
+        setTimeout(typeLine, 48);
       } else {
         col = 0; line++;
-        setTimeout(typeLine, 140);
+        setTimeout(typeLine, 340);
       }
     }
     typeLine();
@@ -81,6 +87,20 @@
   }
   tick();
   setInterval(tick, 1000);
+
+  /* ── status footer: cycling commands ────────────────────────── */
+  const TERM = [
+    "./stack --online",
+    "ng serve --watch",
+    "dotnet build --release",
+    "git push --deploy",
+    "npm run ship"
+  ];
+  const wordsEl = document.querySelector(".ticker__words");
+  if (wordsEl && !reduced) {
+    let i = 1;
+    setInterval(() => { wordsEl.textContent = TERM[i++ % TERM.length]; }, 2600);
+  }
 
   /* ── command nav ───────────────────────────────────────────── */
   const GHOST = { about: "01", resume: "02", work: "03", contact: "04" };
