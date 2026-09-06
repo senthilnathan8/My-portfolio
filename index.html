@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Senthilnathan S — Web Developer</title>
+
+  <meta name="description" content="Senthilnathan S — Web Developer at Cognizant, Chennai. Hand-built terminal and glass portfolio. Angular, .NET, JavaScript, HTML, CSS.">
+  <meta name="theme-color" content="#07090d">
+  <meta name="color-scheme" content="dark">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Senthilnathan S — Web Developer">
+  <meta property="og:description" content="Hand-built, terminal × glass portfolio. Angular · .NET · JavaScript · HTML · CSS.">
+  <meta property="og:url" content="https://senthilnathan8.github.io/My-portfolio/">
+
+  <link rel="icon" type="image/svg+xml" href="./favicon.svg">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;500;700&family=Unbounded:wght@500;700;800&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+
+  <!-- ── ambient layers ─────────────────────────────────────────── -->
+  <div class="aurora" aria-hidden="true"><span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span></div>
+  <div class="crt" aria-hidden="true"></div>
+
+  <!-- ── boot sequence ──────────────────────────────────────────── -->
+  <div class="boot" id="boot" role="presentation">
+    <div class="boot__win">
+      <pre class="boot__log" id="bootLog"></pre>
+      <pre class="boot__prompt" aria-hidden="true">&gt; <span class="cursor"></span></pre>
+    </div>
+  </div>
+
+  <!-- ── status bar ─────────────────────────────────────────────── -->
+  <header class="statusbar">
+    <span class="statusbar__prompt"><span class="gr">senthil</span>@portfolio:~$</span>
+    <span class="statusbar__group">
+      <span class="statusbar__dot" aria-hidden="true"></span>
+      <span class="statusbar__clock gr" id="clock">--:--:--</span>
+    </span>
+  </header>
+
+  <main class="shell">
+
+    <!-- ── command navigation ─────────────────────────────────── -->
+    <nav class="cmdnav" aria-label="Sections">
+      <button class="nav-btn is-active" data-tab="about" type="button">
+        <span class="nav-prompt">$</span> cd <span class="nav-path">./about</span>
+      </button>
+      <button class="nav-btn" data-tab="resume" type="button">
+        <span class="nav-prompt">$</span> cd <span class="nav-path">./resume</span>
+      </button>
+      <button class="nav-btn" data-tab="work" type="button">
+        <span class="nav-prompt">$</span> cd <span class="nav-path">./work</span>
+      </button>
+      <button class="nav-btn" data-tab="contact" type="button">
+        <span class="nav-prompt">$</span> cd <span class="nav-path">./contact</span>
+      </button>
+    </nav>
+
+    <!-- ══════════════ ABOUT ══════════════ -->
+    <section class="panel is-active" id="about" data-page="about" aria-labelledby="about-title">
+      <div class="panel__head">
+        <span class="panel__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="panel__path">~/senthil/about.md</span>
+      </div>
+
+      <div class="panel__body">
+        <header class="hero">
+          <p class="hero__kicker gr">$ ./senthil --profile</p>
+          <h1 class="hero__name" id="about-title">Senthilnathan&nbsp;S</h1>
+          <p class="hero__role">Web Developer <span class="dim">@</span> Cognizant</p>
+          <p class="hero__tag dim">Angular &nbsp;·&nbsp; .NET &nbsp;·&nbsp; JavaScript &nbsp;·&nbsp; HTML &nbsp;·&nbsp; CSS</p>
+        </header>
+
+        <div class="bio">
+          <p>I’m a web developer who likes turning messy problems into clean, fast, human-feeling interfaces. Right now I’m building and sharpening my craft at <span class="gr">Cognizant</span>, Chennai.</p>
+          <p>I work across the stack — Angular and JavaScript on the front-end, .NET behind it — with a soft spot for the details most people never notice: the 12&nbsp;ms it takes, the motion that feels right, the markup that stays readable.</p>
+        </div>
+
+        <ul class="facts">
+          <li class="fact"><span class="fact__k dim">location</span><span class="fact__v">Chennai, India</span></li>
+          <li class="fact"><span class="fact__k dim">status</span><span class="fact__v gr">open to work</span></li>
+          <li class="fact"><span class="fact__k dim">stack</span><span class="fact__v">Angular · .NET · JS</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ══════════════ RESUME ══════════════ -->
+    <section class="panel" id="resume" data-page="resume" aria-labelledby="resume-title">
+      <div class="panel__head">
+        <span class="panel__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="panel__path">~/senthil/resume.md</span>
+      </div>
+
+      <div class="panel__body">
+        <h2 class="h2" id="resume-title">Resume</h2>
+
+        <div class="timeline">
+          <h3 class="h3 gr">$ cat education.log</h3>
+          <ol class="tl">
+            <li class="tl__item">
+              <span class="tl__tag">[edu]</span>
+              <h4 class="tl__title">B.Tech — Information Technology</h4>
+              <p class="tl__meta">SRM Institute of Science and Technology, Ramapuram</p>
+              <div class="tl__row"><span class="tl__date">2020 – 2024</span><span class="tl__score">CGPA 9.03</span></div>
+            </li>
+            <li class="tl__item">
+              <span class="tl__tag">[edu]</span>
+              <h4 class="tl__title">HSC — Higher Secondary Certificate</h4>
+              <p class="tl__meta">Sai Matriculation Higher Secondary School</p>
+              <div class="tl__row"><span class="tl__date">2018 – 2020</span><span class="tl__score">90.3%</span></div>
+            </li>
+            <li class="tl__item">
+              <span class="tl__tag">[edu]</span>
+              <h4 class="tl__title">SSLC — Secondary School Leaving Certificate</h4>
+              <p class="tl__meta">Sai Matriculation Higher Secondary School</p>
+              <div class="tl__row"><span class="tl__date">Completed 2018</span><span class="tl__score">91.4%</span></div>
+            </li>
+          </ol>
+
+          <h3 class="h3 gr">$ cat experience.log</h3>
+          <ol class="tl">
+            <li class="tl__item">
+              <span class="tl__tag">[exp]</span>
+              <h4 class="tl__title">Programmer Analyst Trainee</h4>
+              <p class="tl__meta">Cognizant</p>
+              <div class="tl__row"><span class="tl__date">Jul 2025 – Present</span></div>
+              <p class="tl__text">Full-time role in intensive front-end training — HTML, CSS, JavaScript, and Angular.</p>
+            </li>
+            <li class="tl__item">
+              <span class="tl__tag">[exp]</span>
+              <h4 class="tl__title">Full Stack Developer Intern</h4>
+              <p class="tl__meta">Cognizant</p>
+              <div class="tl__row"><span class="tl__date">Jan 2025 – Jun 2025</span></div>
+              <p class="tl__text">Shipped full-stack features — .NET on the backend, Angular on the frontend, SQL Server (SSMS) for data.</p>
+            </li>
+          </ol>
+        </div>
+
+        <div class="skills">
+          <h3 class="h3 gr">$ skills --list</h3>
+          <div class="sk" id="skills" role="img" aria-label="Skill levels">
+            <span class="sk-entry"><span class="sk-name">html</span><span class="sk-bar"><i style="--lv:90%"></i></span><span class="sk-pct">90%</span></span>
+            <span class="sk-entry"><span class="sk-name">css</span><span class="sk-bar"><i style="--lv:85%"></i></span><span class="sk-pct">85%</span></span>
+            <span class="sk-entry"><span class="sk-name">javascript</span><span class="sk-bar"><i style="--lv:65%"></i></span><span class="sk-pct">65%</span></span>
+            <span class="sk-entry"><span class="sk-name">angular</span><span class="sk-bar"><i style="--lv:65%"></i></span><span class="sk-pct">65%</span></span>
+            <span class="sk-entry"><span class="sk-name">.net</span><span class="sk-bar"><i style="--lv:50%"></i></span><span class="sk-pct">50%</span></span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══════════════ WORK ══════════════ -->
+    <section class="panel" id="work" data-page="work" aria-labelledby="work-title">
+      <div class="panel__head">
+        <span class="panel__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="panel__path">~/senthil/work/</span>
+      </div>
+
+      <div class="panel__body">
+        <h2 class="h2" id="work-title">Selected Work</h2>
+        <p class="hint dim">$ ls ~/projects — rendered from <span class="gr">assets/js/data.js</span></p>
+
+        <div class="workgrid" id="workGrid"><!-- cards injected by main.js --></div>
+
+        <p class="work-note dim">/* drop your projects into <span class="gr">assets/js/data.js</span> — one entry per card */</p>
+      </div>
+    </section>
+
+    <!-- ══════════════ CONTACT ══════════════ -->
+    <section class="panel" id="contact" data-page="contact" aria-labelledby="contact-title">
+      <div class="panel__head">
+        <span class="panel__dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="panel__path">~/senthil/contact.md</span>
+      </div>
+
+      <div class="panel__body">
+        <h2 class="h2" id="contact-title">Contact</h2>
+        <p class="lead">Say hello. I reply to email within a day or two.</p>
+
+        <ul class="chips">
+          <li class="chips__row">
+            <span class="chips__key dim">@</span>
+            <a class="chips__link" href="mailto:senthilnathan.s.d@gmail.com">senthilnathan.s.d@gmail.com</a>
+            <span class="chips__go gr">↗</span>
+          </li>
+          <li class="chips__row">
+            <span class="chips__key dim">in</span>
+            <a class="chips__link" href="https://www.linkedin.com/in/senthilnathan-ss/" target="_blank" rel="noopener">linkedin.com/in/senthilnathan-ss</a>
+            <span class="chips__go gr">↗</span>
+          </li>
+          <li class="chips__row">
+            <span class="chips__key dim">✆</span>
+            <a class="chips__link" href="tel:+918925410562">+91 89254 10562</a>
+            <span class="chips__go gr">↗</span>
+          </li>
+          <li class="chips__row">
+            <span class="chips__key dim">⌖</span>
+            <span class="chips__link" aria-label="Location">Chennai, India</span>
+          </li>
+        </ul>
+
+        <div class="socials">
+          <p class="hint dim">$ whoami --links — add your URLs below</p>
+          <div class="socials__row">
+            <a class="chip chip--tbd" href="#" title="Add your GitHub URL">gh <em>[fill url]</em></a>
+            <a class="chip chip--tbd" href="#" title="Add your X URL">x <em>[fill url]</em></a>
+            <a class="chip chip--tbd" href="#" title="Add your Instagram URL">ig <em>[fill url]</em></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── marquee ticker ─────────────────────────────────────────── -->
+  <footer class="ticker" aria-hidden="true">
+    <div class="ticker__track">
+      <span>ANGULAR&nbsp;✦&nbsp;.NET&nbsp;✦&nbsp;CHENNAI&nbsp;✦&nbsp;WEB&nbsp;DEVELOPER&nbsp;✦&nbsp;</span>
+      <span aria-hidden="true">ANGULAR&nbsp;✦&nbsp;.NET&nbsp;✦&nbsp;CHENNAI&nbsp;✦&nbsp;WEB&nbsp;DEVELOPER&nbsp;✦&nbsp;</span>
+    </div>
+  </footer>
+
+  <!-- ── build-log toast ────────────────────────────────────────── -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="./assets/js/data.js"></script>
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>
