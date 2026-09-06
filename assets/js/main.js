@@ -152,8 +152,25 @@
   const GHOST = { about: "01", resume: "02", work: "03", contact: "04" };
   const buttons = Array.from(document.querySelectorAll(".nav-btn"));
   const panels = Array.from(document.querySelectorAll(".panel"));
+  const pill = document.querySelector(".cmdnav__pill");
 
   panels.forEach(p => { p.classList.add("is-focusable"); p.setAttribute("tabindex", "-1"); p.setAttribute("data-ghost", GHOST[p.dataset.page] || ""); });
+
+  /* Apple — slide the active-tab pill under the pressed button,
+     springing from the button's live position (interruptible). */
+  function movePill() {
+    if (!pill || reduced) { if (pill) pill.style.opacity = "0"; return; }
+    const active = document.querySelector(".nav-btn.is-active");
+    const nav = document.querySelector(".cmdnav");
+    if (!active || !nav) return;
+    const navRect = nav.getBoundingClientRect();
+    const r = active.getBoundingClientRect();
+    pill.style.opacity = "1";
+    pill.style.width = r.width + "px";
+    pill.style.transform = `translateX(${r.left - navRect.left - 8}px)`;
+  }
+  movePill();
+  window.addEventListener("resize", movePill);
 
   let toastTimer = null;
   function toast(name) {
@@ -185,6 +202,7 @@
 
     if (page === "resume") { skillsGo(); }
     toast(page);
+    movePill();
   }
 
   buttons.forEach(b =>
@@ -195,6 +213,7 @@
   document.addEventListener("ready-reveal", () => {
     const active = document.querySelector(".panel.is-active");
     if (active) scan(active);
+    movePill(); /* fonts are in — re-measure the pill */
   });
 
   /* ── skills fill ───────────────────────────────────────────── */
@@ -214,6 +233,7 @@
     PROJECTS.forEach((proj, i) => {
       const rel = "~/projects/" + slug(proj.name) + ".html";
       const card = el("article", "workcard");
+      card.style.setProperty("--i", i);
       card.innerHTML = `
         <div class="workcard__head"><i></i><i></i><i></i><span class="workcard__path"></span></div>
         <div class="workcard__body">
@@ -261,4 +281,9 @@
   }
 
   renderWork();
+
+  /* stagger the work cards once, right after the boot overlay lifts */
+  document.addEventListener("ready-reveal", () => {
+    if (grid) grid.classList.add("is-go");
+  }, { once: true });
 })();
