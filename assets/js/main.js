@@ -20,17 +20,34 @@
   function runBoot() {
     const overlay = document.getElementById("boot");
     const log = document.getElementById("bootLog");
+    const bar = document.getElementById("bootBar");
+    const BOOT_TYPEMS = 48, BOOT_LINE = 340, BOOT_DONE = 560;
     if (!overlay) return;
+
+    function fillBar() {
+      if (!bar) return;
+      let total = BOOT_DONE;
+      BOOT.forEach(sp => { total += (sp.length - 1) * BOOT_TYPEMS + BOOT_LINE; });
+      bar.style.transition = "none";
+      bar.style.width = "100%";
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        bar.style.transition = `width ${total}ms linear`;
+        bar.style.width = "100%";
+      }));
+    }
 
     if (reduced) {
       renderAllLines(log);
+      if (bar) bar.style.width = "100%";
       setTimeout(() => {
         overlay.classList.add("is-done");
         document.body.classList.add("is-ready");
+        document.dispatchEvent(new Event("ready-reveal"));
       }, 150);
       return;
     }
 
+    fillBar();
     let line = 0, col = 0;
     const lineEl = document.createElement("div");
     const cls = { gr: "gr", ok: "ok", val: "val" };
@@ -40,7 +57,8 @@
         setTimeout(() => {
           overlay.classList.add("is-done");
           document.body.classList.add("is-ready");
-        }, 560);
+          document.dispatchEvent(new Event("ready-reveal"));
+        }, BOOT_DONE);
         return;
       }
       if (col === 0) {
@@ -54,10 +72,10 @@
       lineEl.appendChild(node);
       col++;
       if (col < BOOT[line].length) {
-        setTimeout(typeLine, 48);
+        setTimeout(typeLine, BOOT_TYPEMS);
       } else {
         col = 0; line++;
-        setTimeout(typeLine, 340);
+        setTimeout(typeLine, BOOT_LINE);
       }
     }
     typeLine();
@@ -87,6 +105,34 @@
   }
   tick();
   setInterval(tick, 1000);
+
+  /* ── hero: one-shot typed tag on reveal ─────────────────────── */
+  const typeEl = document.getElementById("typeLine");
+  const TAG = "Angular · .NET · JavaScript · HTML · CSS";
+  function startType() {
+    if (!typeEl) return;
+    if (reduced) { typeEl.textContent = TAG; return; }
+    let ci = 0;
+    (function typeOnce() {
+      ci++;
+      typeEl.textContent = TAG.slice(0, ci) || " ";
+      if (ci < TAG.length) setTimeout(typeOnce, 52);
+    })();
+  }
+  if (typeEl) document.addEventListener("ready-reveal", startType, { once: true });
+
+  /* ── sysread: live uptime + mem ────────────────────────────── */
+  const upEl = document.getElementById("uptime");
+  const memEl = document.getElementById("mem");
+  let upSecs = 0;
+  setInterval(() => {
+    upSecs++;
+    if (upEl) {
+      const s = upSecs % 60, m = Math.floor(upSecs / 60) % 60, h = Math.floor(upSecs / 3600);
+      upEl.textContent = `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}:${String(s).padStart(2, "0")}`;
+    }
+    if (memEl) memEl.textContent = (38 + Math.floor(Math.random() * 26)) + "%";
+  }, 1000);
 
   /* ── status footer: cycling commands ────────────────────────── */
   const TERM = [
@@ -120,12 +166,22 @@
     toastTimer = setTimeout(() => el.classList.remove("is-show"), 1600);
   }
 
+  function scan(panel) {
+    /* keep the sweep's visual speed constant on every page: a taller
+       panel travels farther, so give it a proportionally longer run. */
+    const h = Math.round(panel.getBoundingClientRect().height) || 600;
+    const dur = Math.min(Math.max(1.0 * (h / 600), 0.8), 2.4);
+    panel.style.setProperty("--scan", dur.toFixed(2) + "s");
+    panel.classList.remove("is-scan");
+    requestAnimationFrame(() => { panel.classList.add("is-scan"); });
+  }
+
   function activate(page) {
     buttons.forEach(b => b.classList.toggle("is-active", b.dataset.tab === page));
     panels.forEach(p => p.classList.toggle("is-active", p.dataset.page === page));
 
     const active = panels.find(p => p.dataset.page === page);
-    if (active) active.focus({ preventScroll: true });
+    if (active) { active.focus({ preventScroll: true }); scan(active); }
 
     if (page === "resume") { skillsGo(); }
     toast(page);
@@ -134,6 +190,12 @@
   buttons.forEach(b =>
     b.addEventListener("click", () => activate(b.dataset.tab))
   );
+
+  /* scan the visible panel once when the page reveals */
+  document.addEventListener("ready-reveal", () => {
+    const active = document.querySelector(".panel.is-active");
+    if (active) scan(active);
+  });
 
   /* ── skills fill ───────────────────────────────────────────── */
   const sk = document.getElementById("skills");
