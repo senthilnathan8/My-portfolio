@@ -16,12 +16,12 @@
 
 const PROJECTS = [
   {
-    name: "Your first project",
-    tag: "web",
-    year: "2025",
-    desc: "A short line about what it does and why you built it.",
-    code: "build( idea ) → shipping",
-    href: "",
+    name: "Stop Sign Recognition",
+    tag: "tool",
+    year: "2026",
+    desc: "Real-time stop-sign detection for ADAS — a 20-stage Haar cascade fused with HSV red-filter and octagon validation to reject false positives.",
+    code: "python stop_sign_detection.py --source 0",
+    href: "https://github.com/senthilnathan8/Stop-Sign-Reconition",
     demo: ""
   },
   {
